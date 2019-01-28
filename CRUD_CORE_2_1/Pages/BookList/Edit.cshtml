@@ -1,0 +1,49 @@
+﻿@page
+@model CRUD_CORE_2_1.Pages.BookList.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<br />
+
+<div class="well">
+    <form method="post" class="form-horizontal" role="form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Book.Id" hidden />
+        <div class="form-group">
+            <label asp-for="Book.Name" class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" asp-for="Book.Name" class="form-control" placeholder="Name">
+            </div>
+            <span asp-validation-for="Book.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.ISBN" class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" asp-for="Book.ISBN" class="form-control" placeholder="ISBN">
+            </div>
+            <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.Author" class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" asp-for="Book.Author" class="form-control" placeholder="Author">
+            </div>
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary btn-sm" />
+            <a class="btn btn-warning btn-sm" asp-page="Index">Back To List</a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("Shared/_ValidationScriptsPartial");
+    }
+}
