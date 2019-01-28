@@ -15,33 +15,39 @@
 }
 
 <a asp-page="Create" class="btn btn-default">Create</a>
+<form method="post">
+    @if (Model.Books.Any())
+    {
+        <p>Books Are Available</p>
 
-@if (Model.Books.Any())
-{
-    <p>Books Are Available</p>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>ISBN</b></td>
-                <td><b>Author</b></td>
-                <td><b>Actions</b></td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var b in Model.Books)
-            {
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(m => b.Name)</td>
-                    <td>@Html.DisplayFor(m => b.ISBN)</td>
-                    <td>@Html.DisplayFor(m => b.Author)</td>
-                    <td>@Html.ActionLink("Delete", "Delete", new { Id = b.Id }) | @Html.ActionLink("Edit", "Edit", new { Id = b.Id })</td>
+                    <td><b>Name</b></td>
+                    <td><b>ISBN</b></td>
+                    <td><b>Author</b></td>
+                    <td><b>Actions</b></td>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Books are not Avaialable</p>
-}
+            </thead>
+            <tbody>
+                @foreach (var b in Model.Books)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => b.Name)</td>
+                        <td>@Html.DisplayFor(m => b.ISBN)</td>
+                        <td>@Html.DisplayFor(m => b.Author)</td>
+                        <td>
+                            <button asp-page-handler="Delete" asp-route-id="@b.Id" class="btn btn-danger btn-sm">Delete</button> |
+                            <a asp-page="Edit" asp-route-id="@b.Id" class="btn btn-info btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>Books are not Avaialable</p>
+    }
+</form>

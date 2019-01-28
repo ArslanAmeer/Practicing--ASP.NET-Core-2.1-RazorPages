@@ -30,5 +30,18 @@ namespace CRUD_CORE_2_1.Pages.BookList
                 Books = await _db.Books.ToListAsync();
             }
         }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            using (_db)
+            {
+                var book = await _db.Books.FindAsync(id);
+                _db.Books.Remove(book);
+                await _db.SaveChangesAsync();
+            }
+
+            Message = $"Book with Id: {id} Deleted Successfully";
+            return RedirectToPage("Index");
+        }
     }
 }
