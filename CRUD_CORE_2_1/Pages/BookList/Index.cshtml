@@ -1,0 +1,47 @@
+﻿@page
+@model CRUD_CORE_2_1.Pages.BookList.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Book List</h2>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @Model.Message
+    </div>
+}
+
+<a asp-page="Create" class="btn btn-default">Create</a>
+
+@if (Model.Books.Any())
+{
+    <p>Books Are Available</p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>ISBN</b></td>
+                <td><b>Author</b></td>
+                <td><b>Actions</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.Books)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => b.Name)</td>
+                    <td>@Html.DisplayFor(m => b.ISBN)</td>
+                    <td>@Html.DisplayFor(m => b.Author)</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { Id = b.Id }) | @Html.ActionLink("Edit", "Edit", new { Id = b.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Books are not Avaialable</p>
+}
